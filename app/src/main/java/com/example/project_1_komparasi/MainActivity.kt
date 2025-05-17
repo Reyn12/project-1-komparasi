@@ -1,14 +1,10 @@
 package com.example.project_1_komparasi
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
 import com.example.project_1_komparasi.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -21,22 +17,33 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    var nim: String = ""
-    var nama: String = ""
+//    var nim: String = ""
+//    var nama: String = ""
+
+    var mahasiswa: Mahasiswa = Mahasiswa()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+//        View Binding
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+
+//        Data Binding
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         binding.btnSimpan.setOnClickListener {
-            nim = binding.edtNim.text.toString()
-            nama = binding.edtNama.text.toString()
 
-            binding.txtNim.text = "NIM : " + nim
-            binding.txtNama.text = "NAMA : " + nama
+            mahasiswa.nim = binding.edtNim.text.toString()
+            mahasiswa.nama = binding.edtNama.text.toString()
+
+//            var m1 = Mahasiswa("10122002", "Renaldi")
+
+            binding.mahasiswa = mahasiswa
+
+//            binding.txtNim.text = "NIM : " + nim
+//            binding.txtNama.text = "NAMA : " + nama
 
             Toast.makeText(this, "Data Berhasil Disimpan", Toast.LENGTH_SHORT).show()
         }
